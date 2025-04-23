@@ -141,23 +141,29 @@ select title from books WHERE stock = 0
 
 -- problem 2 : Retrieve the most expensive book in the store.
 
-SELECT * from books ORDER BY price DESC LIMIT 1 
+SELECT * from books 
+ORDER BY price DESC
+LIMIT 1 
 
 
 -- problem 3:  Find the total number of orders placed by each customer.
 
-SELECT customer_id,  count(quantity) from orders GROUP BY customer_id
+SELECT customer_id,  count(quantity) from orders 
+GROUP BY customer_id
 
 
 -- problem 4: Calculate the total revenue generated from book sales.
 
-SELECT sum(quantity * price) as total_revenue from orders JOIN books on books.id = orders.book_id
+SELECT sum(quantity * price) as total_revenue from orders 
+JOIN books on books.id = orders.book_id
 
 
 
 -- problem %: List all customers who have placed more than one order.
 
-SELECT  customer_id , name, count(*) as order_count from orders JOIN customers on customers.id = orders.customer_id  GROUP BY customer_id, name   HAVING count(*) > 1
+SELECT  customer_id , name, count(*) as order_count from orders 
+JOIN customers on customers.id = orders.customer_id  
+GROUP BY customer_id, name   HAVING count(*) > 1
 
 
 -- problem 6:  Find the average price of books in the store.
@@ -167,11 +173,13 @@ SELECT round(avg(price), 2) from books
 -- problem 7: Increase the price of all books published before 2000 by 10%.
 
 
-update books set price = (price * 10/100)+ price WHERE id in(SELECT id from books WHERE published_year < 2000 )
+update books set price = (price * 10/100)+ price 
+WHERE id in(SELECT id from books WHERE published_year < 2000 )
 
 
 -- problem 8: Delete customers who haven't placed any orders.
 
 
-DELETE from customers WHERE id NOT in(SELECT customer_id from orders GROUP BY customer_id)
+DELETE from customers 
+WHERE id NOT in(SELECT customer_id from orders GROUP BY customer_id)
 
